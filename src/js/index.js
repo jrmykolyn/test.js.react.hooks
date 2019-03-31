@@ -6,9 +6,11 @@ const data = {
   ],
 };
 
+const Quote = ({ quote }) => <section><blockquote>{ quote }</blockquote></section>;
+
 const App = ({ data }) => {
   const [quotes, setQuotes] = useState(data.quotes);
-  const quoteElems = quotes.map((quote) => <section><blockquote>{ quote }</blockquote></section>);
+  const quoteElems = quotes.map((quote, i) => <Quote key={i} quote={ quote } />);
   return (
     <main>{ quoteElems }</main>
   );
