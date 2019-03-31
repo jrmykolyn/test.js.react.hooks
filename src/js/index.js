@@ -1,4 +1,6 @@
-const { useEffect, useRef, useState } = React;
+const { useContext, useEffect, useRef, useState } = React;
+
+const ModeContext = React.createContext();
 
 const data = {
   quotes: [
@@ -9,6 +11,7 @@ const data = {
 const Quote = ({ quote }) => <section><blockquote>{ quote }</blockquote></section>;
 
 const Form = ({ addQuote }) => {
+  const mode = useContext(ModeContext);
   const textareaElem = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +19,16 @@ const Form = ({ addQuote }) => {
     textareaElem.current.value = '';
   };
 
-  return (
-    <form onSubmit={ handleSubmit }>
+  const output = mode === 'admin'
+   ? (
+     <form onSubmit={ handleSubmit }>
       <textarea name="text" ref={ textareaElem }></textarea>
       <button>Submit</button>
     </form>
-  );
+   )
+   : <p>Whoops! Only admins may add new quotes.</p>;
+
+  return output;
 };
 
 const App = ({ data }) => {
@@ -37,12 +44,12 @@ const App = ({ data }) => {
   };
 
   return (
-    <main>
+    <ModeContext.Provider value={ 'admin' }>
       <section>
         { quoteElems }
       </section>
       <Form addQuote={ addQuote } />
-    </main>
+    </ModeContext.Provider>
   );
 };
 
