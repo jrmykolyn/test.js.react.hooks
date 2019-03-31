@@ -13,6 +13,7 @@ const Form = ({ addQuote }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addQuote(textareaElem.current.value);
+    textareaElem.current.value = '';
   };
 
   return (
