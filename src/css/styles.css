@@ -1,0 +1,62 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  background: #fafafa;
+  color: #333;
+  padding: 3rem;
+}
+
+.quote {
+  margin: 0;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.3rem 2rem -0.5rem rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.quote blockquote {
+  font-size: 2.2rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+}
+
+.quote blockquote:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.quote button {
+  font-size: 1.4rem;
+  line-height: 3.2rem;
+  padding: 0 2.5rem;
+  background: rgba(255, 0, 0, 0.25);
+  color: red;
+  border: solid 0.2rem red;
+  border-radius: 1.8rem;
+  transition: background 0.15s;
+}
+
+.quote button:hover,
+.quote button:focus {
+  background: rgba(255, 0, 0, 0.4);
+}

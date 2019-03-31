@@ -10,7 +10,7 @@ const Quote = ({ deleteQuote, quote }) => {
     : '';
 
   return (
-    <section>
+    <section className="quote">
       <blockquote>{ quote }</blockquote>
       { deleteElem }
     </section>
