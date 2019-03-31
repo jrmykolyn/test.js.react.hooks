@@ -8,7 +8,20 @@ const data = {
   ],
 };
 
-const Quote = ({ quote }) => <section><blockquote>{ quote }</blockquote></section>;
+const Quote = ({ deleteQuote, quote }) => {
+  const mode = useContext(ModeContext);
+
+  const deleteElem = mode === 'admin'
+    ? <button onClick={() => deleteQuote(quote) }>Delete</button>
+    : '';
+
+  return (
+    <section>
+      <blockquote>{ quote }</blockquote>
+      { deleteElem }
+    </section>
+  );
+};
 
 const Form = ({ addQuote }) => {
   const mode = useContext(ModeContext);
@@ -33,15 +46,20 @@ const Form = ({ addQuote }) => {
 
 const App = ({ data }) => {
   const [quotes, setQuotes] = useState(data.quotes);
-  const quoteElems = quotes.map((quote, i) => <Quote key={i} quote={ quote } />);
 
   useEffect(() => {
     document.title = `Showing ${quotes.length} ${quotes.length > 1 ? 'quotes': 'quote'}!`;
   });
 
+  const deleteQuote = (quote) => {
+    setQuotes((quotes) => quotes.filter((q) => q !== quote));
+  };
+
   const addQuote = (quote) => {
     setQuotes((quotes) => [...quotes, quote]);
   };
+
+  const quoteElems = quotes.map((quote, i) => <Quote key={i} quote={ quote } deleteQuote={ deleteQuote } />);
 
   return (
     <ModeContext.Provider value={ 'admin' }>
