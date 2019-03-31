@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useRef, useState } = React;
 
 const data = {
   quotes: [
@@ -9,14 +9,15 @@ const data = {
 const Quote = ({ quote }) => <section><blockquote>{ quote }</blockquote></section>;
 
 const Form = ({ addQuote }) => {
+  const textareaElem = useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    addQuote(e.target.querySelector('textarea').value);
+    addQuote(textareaElem.current.value);
   };
 
   return (
     <form onSubmit={ handleSubmit }>
-      <textarea name="text"></textarea>
+      <textarea name="text" ref={ textareaElem }></textarea>
       <button>Submit</button>
     </form>
   );
