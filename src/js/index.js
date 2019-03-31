@@ -2,12 +2,6 @@ const { useContext, useEffect, useRef, useState } = React;
 
 const ModeContext = React.createContext();
 
-const data = {
-  quotes: [
-    'Two possibilities exist: Either we are alone in the Universe or we are not. Both are equally terrifying.',
-  ],
-};
-
 const Quote = ({ deleteQuote, quote }) => {
   const mode = useContext(ModeContext);
 
@@ -71,4 +65,4 @@ const App = ({ data }) => {
   );
 };
 
-ReactDOM.render(<App data={ data } />, document.getElementById('root'));
+ReactDOM.render(<App data={ window.__DATA__ } />, document.getElementById('root'));
