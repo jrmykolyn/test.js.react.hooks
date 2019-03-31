@@ -1,4 +1,4 @@
-const { useRef, useState } = React;
+const { useEffect, useRef, useState } = React;
 
 const data = {
   quotes: [
@@ -27,6 +27,10 @@ const Form = ({ addQuote }) => {
 const App = ({ data }) => {
   const [quotes, setQuotes] = useState(data.quotes);
   const quoteElems = quotes.map((quote, i) => <Quote key={i} quote={ quote } />);
+
+  useEffect(() => {
+    document.title = `Showing ${quotes.length} ${quotes.length > 1 ? 'quotes': 'quote'}!`;
+  });
 
   const addQuote = (quote) => {
     setQuotes((quotes) => [...quotes, quote]);
