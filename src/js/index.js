@@ -8,11 +8,35 @@ const data = {
 
 const Quote = ({ quote }) => <section><blockquote>{ quote }</blockquote></section>;
 
+const Form = ({ addQuote }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addQuote(e.target.querySelector('textarea').value);
+  };
+
+  return (
+    <form onSubmit={ handleSubmit }>
+      <textarea name="text"></textarea>
+      <button>Submit</button>
+    </form>
+  );
+};
+
 const App = ({ data }) => {
   const [quotes, setQuotes] = useState(data.quotes);
   const quoteElems = quotes.map((quote, i) => <Quote key={i} quote={ quote } />);
+
+  const addQuote = (quote) => {
+    setQuotes((quotes) => [...quotes, quote]);
+  };
+
   return (
-    <main>{ quoteElems }</main>
+    <main>
+      <section>
+        { quoteElems }
+      </section>
+      <Form addQuote={ addQuote } />
+    </main>
   );
 };
 
